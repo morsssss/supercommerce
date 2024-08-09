@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-export default function LogoIcon({ className } : { className : string }) {
+export default function LogoIcon(props: React.ComponentProps<'image'>) {
   return (
     <Image
-      className={ className }
+      className={ props.className }
       src="/disco_head_40x40.png"
-      width={40}
-      height={40}
+      width={props.width}
+      height={props.height}
       alt="Tiny disco boi"
     />
   );

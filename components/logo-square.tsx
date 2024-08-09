@@ -17,6 +17,8 @@ export default function LogoSquare({ size }: { size?: 'sm' | undefined }) {
           'h-[32px] w-[32px]': !size,
           'h-[24px] w-[24px]': size === 'sm'
         })}
+        width={32}
+        height={32}
       />
     </div>
   );
