@@ -1,6 +1,6 @@
 import { AddToCart } from 'components/cart/add-to-cart';
 import Price from 'components/price';
-import { CustomizeButton } from 'components/product/customize-product';
+import { CustomizeButton, CustomizeUI } from 'components/product/customize-product';
 import Prose from 'components/prose';
 import { Product } from 'lib/shopify/types';
 import { VariantSelector } from './variant-selector';
@@ -26,6 +26,7 @@ export function ProductDescription({ product }: { product: Product }) {
       ) : null}
       <AddToCart product={product} />
       <CustomizeButton />
+      <CustomizeUI />
     </>
   );
 }

@@ -39,6 +39,5 @@ yarn-error.log*
 next-env.d.ts
 .env*.local
 
-#vscode
-.vscode/launch.json
-.vscode/supercommerce.code-workspace
+# vscode
+.vscode/

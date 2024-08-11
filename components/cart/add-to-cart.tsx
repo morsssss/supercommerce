@@ -16,11 +16,10 @@ function SubmitButton({
   availableForSale: boolean;
   selectedVariantId: string | undefined;
 }) {
-  const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60';
 
   if (!availableForSale) {
     return (
-      <button disabled className={clsx(uiClasses.actionButton, disabledClasses)}>
+      <button disabled className={clsx(uiClasses.actionButton, uiClasses.disabledButtonClasses)}>
         Out Of Stock
       </button>
     );
@@ -32,7 +31,7 @@ function SubmitButton({
       <button
         aria-label="Please select an option"
         disabled
-        className={clsx(uiClasses.actionButton, disabledClasses)}
+        className={clsx(uiClasses.actionButton, uiClasses.disabledButtonClasses)}
       >
         <div className="absolute left-0 ml-4">
           <PlusIcon className="h-5" />
