@@ -29,3 +29,8 @@ export const TAGS = {
 export const HIDDEN_PRODUCT_TAG = 'nextjs-frontend-hidden';
 export const DEFAULT_OPTION = 'Default Title';
 export const SHOPIFY_GRAPHQL_API_ENDPOINT = '/api/2023-01/graphql.json';
+
+/* Probably these could go somewhere more appropriate. I'm not used to using tailwind... */
+export const uiClasses = {
+  actionButton: 'relative flex w-full items-center justify-center rounded-full bg-blue-600 p-4 tracking-wide text-white'
+};
