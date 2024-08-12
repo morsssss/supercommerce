@@ -1,7 +1,7 @@
 'use client';
 
 import { Dialog, Transition } from '@headlessui/react';
-import { CheckIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
+import { CheckIcon, MicrophoneIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { ElevenLabsClient } from "elevenlabs";
 import { uiClasses } from 'lib/constants';
@@ -30,6 +30,14 @@ function CustomizeButton({ setIsOpen }) {
       </div>
       Customize audio
     </button>
+  );
+}
+
+function CloseButton() {
+  return (
+    <div className="absolute top-1 right-1 flex h-11 w-11 items-center justify-center text-black transition-colors  dark:text-white">
+      <XMarkIcon className="h-6 transition-all ease-in-out hover:scale-110" />
+    </div>
   );
 }
 
@@ -105,8 +113,11 @@ function AudioCustomization({ isOpen, setIsOpen }) {
         leaveFrom="translate-y-0"
         leaveTo="translate-y-full"
       >
-        <Dialog.Panel className="absolute flex flex-col items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[600px] border-neutral-200 bg-gray-300 p-6 border dark:border-neutral-500 dark:bg-gray-700">
+        <Dialog.Panel className="fixed flex flex-col items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[600px] border-neutral-200 bg-gray-300 p-6 border dark:border-neutral-500 dark:bg-gray-700">
           <Dialog.Title>You can customize this item with your own audio.</Dialog.Title>
+          <button aria-label="Close dialog" onClick={() => setIsOpen(false)}>
+            <CloseButton />
+          </button>
           <form
             className="flex flex-col items-center justify-center mt-5 mb-10 py-4 px-6 border dark:border-neutral-500 w-full"
             onSubmit={onSubmit}
@@ -147,7 +158,7 @@ function AudioCustomization({ isOpen, setIsOpen }) {
               clsx(uiClasses.actionButton, uiClasses.disabledButtonClasses, 'max-w-96')
             }
             aria-label="Accept customization"
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)} // we should also be saving the audio and text, etc
           >
             <div className="absolute left-0 ml-4">
               <CheckIcon className="h-5" />
