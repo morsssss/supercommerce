@@ -10,13 +10,13 @@ import { useState } from 'react';
 export function CustomizeButton() {
   return (
     <button
-      aria-label="Customize with audio"
+      aria-label="Customize audio"
       className={clsx(uiClasses.actionButton, ['hover:opacity-90', 'mt-4'])}
     >
       <div className="absolute left-0 ml-4">
         <MicrophoneIcon className="h-5" />
       </div>
-      Customize with audio
+      Customize audio
     </button>
   );
 }
@@ -32,9 +32,7 @@ export function CustomizeUI() {
     const val = e.target as HTMLFormElement;
     const input = val.customizeText as HTMLInputElement;
 
-    if (input.value) {
-
-    } else {
+    if (!input.value) {
       return false; // ideally this will never happen, heh heh. We should handle this case though.
     }
 
@@ -58,7 +56,7 @@ export function CustomizeUI() {
     const audioStream = await client.generate({
       voice: "Rachel",
       model_id: "eleven_turbo_v2",
-      text,
+      text
     });
 
     for await (const chunk of audioStream) {
@@ -66,18 +64,6 @@ export function CustomizeUI() {
     }
 
     return new Blob(chunks, { type : 'audio/wav' });
-
- /*   await client.textToSpeech.convert("pMsXgVXv3BLzUgSXRplE", {
-        optimize_streaming_latency: ElevenLabs.OptimizeStreamingLatency.Zero,
-        output_format: ElevenLabs.OutputFormat.Mp32205032,
-        text: "It sure does, Jackie\u2026 My mama always said: \u201CIn Carolina, the air's so thick you can wear it!\u201D",
-        voice_settings: {
-            stability: 0.1,
-            similarity_boost: 0.3,
-            style: 0.2
-        }
-    });
-  */
   }
 
  return (
@@ -89,12 +75,10 @@ export function CustomizeUI() {
       <p className="mt-6 mb-6 text-sm leading-tight dark:text-white/[70%]">
         Enter some text and click the button to generate audio.
       </p>
-      <input
-        type="text"
+      <textarea
         name="customizeText"
         placeholder="Happy birthday to you"
         required
-        pattern=".+"
         className="text-md w-full rounded-lg border bg-white px-4 py-2 text-black placeholder:text-neutral-500 md:text-sm dark:border-neutral-500 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"
       />
       <button
@@ -107,10 +91,10 @@ export function CustomizeUI() {
         Generate audio
       </button>
       <Transition show={isAudioGenerated}
-        enter="transition-opacity duration-75"
+        enter="transition-opacity duration-250"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        leave="transition-opacity duration-150"
+        leave="transition-opacity duration-250"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
@@ -118,8 +102,11 @@ export function CustomizeUI() {
       </Transition>
     </form>
     <button 
-      disabled={isAudioGenerated}
-      className={clsx(uiClasses.actionButton, uiClasses.disabledButtonClasses)}
+      disabled={!isAudioGenerated}
+      className={isAudioGenerated ? 
+        uiClasses.actionButton : 
+        clsx(uiClasses.actionButton, uiClasses.disabledButtonClasses)
+      }
       aria-label="Accept customization"
     >
       <div className="absolute left-0 ml-4">
