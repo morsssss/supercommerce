@@ -5,7 +5,7 @@ import { CheckIcon, MicrophoneIcon, XMarkIcon } from '@heroicons/react/24/outlin
 import clsx from 'clsx';
 import { ElevenLabsClient } from "elevenlabs";
 import { uiClasses } from 'lib/constants';
-import { Fragment, useState } from 'react';
+import { Dispatch, Fragment, SetStateAction, useState } from 'react';
 
 export default function CustomizeArea() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function CustomizeArea() {
   );
 }
 
-function CustomizeButton({ setIsOpen }) {
+function CustomizeButton({ setIsOpen } : { setIsOpen : Dispatch<SetStateAction<boolean>>}) {
   return (
     <button
       aria-label="Customize audio"
@@ -41,7 +41,7 @@ function CloseButton() {
   );
 }
 
-function AudioCustomization({ isOpen, setIsOpen }) {
+function AudioCustomization({ isOpen, setIsOpen } : {isOpen : boolean, setIsOpen : Dispatch<SetStateAction<boolean>>}) {
   const [isAudioGenerated, setIsAudioGenerated] = useState(false);
   const [audioBlobSrc, setAudioBlobSrc] = useState('');
 
